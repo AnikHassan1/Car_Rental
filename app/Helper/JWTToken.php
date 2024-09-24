@@ -20,7 +20,7 @@ public static function createJwtToken($userEmail,$userId){
        return Jwt::encode($payload,$key,'HS256');
 }
 
-public function verifyJwtToken($token){
+public static function verifyJwtToken($token){
    try{
     if($token == null){
         return 'unauthorized';

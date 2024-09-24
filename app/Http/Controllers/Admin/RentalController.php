@@ -2,31 +2,79 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Helper\JWTToken;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Rental;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class RentalController extends Controller
 {
-    public function login(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
     {
-        // $count = User::where('email', '=', $request->input('email'))
-        //     ->where('password', '=', $request->input('password'))
-        //     ->select('id')->first();
-        
-        // if ($count !== null) {
-        //     $token = JWTToken::createJwtToken($request->input('email'), $count->id);
-        //     return response()->json([
-        //         "status" => "success",
-        //         "message" => "log in success"
-        //     ], 200)->cookie('token', $token, 60 * 24 * 30, '/');
-        // } else {
-        //     return response()->json([
-        //         'status' => "failed",
-        //         'message' => "unauthorized"
-        //     ], 401);
-        // }
-        return 1;
+    //     $user_id = $request->header('id');
+    //     $car_id = $request->header('id');
+    // $user =Rental::where('user_id',$user_id)->with('user')->first();
+    // $car =Rental::where('car_id',$car_id)->with('Cars')->first();
+    //   return $car;
+
+    $rentals = Rental::with("car")->with("user")->get();
+
+
+    return $rentals;
+
+    // $user_id= $rentals->
+
+    } 
+
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

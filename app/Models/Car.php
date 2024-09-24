@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cars extends Model
+class Car extends Model
 {
  protected  $table='cars';
  protected $fillable =['name',
@@ -16,4 +16,8 @@ class Cars extends Model
                 'daily_rent_price' ,
                 'availability',
                 'image'];
+
+// public function rentals(){
+//     return $this->hashMany(Rental::class);
+// }
 }
