@@ -24,25 +24,26 @@ class CustomerController extends Controller
         ]);
 
         try {
-            $role = $request->input('role', 'customer');
+          //  $role = $request->input('role', 'customer');
 
             // Create the user and hash the password
             User::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'password' => $request->input('password'),  // Hash the password
-                'role' => $role,
+                'password' => $request->input('password') // Hash the password
+                
             ]);
 
             // Return response
             return response()->json([
-                'message' => ($role === 'admin') ? 'Admin signup successful' : 'Customer signup successful',
+                'status' =>"success",
+                'message' => 'Customer signup successful'
             ]);
         } catch (Exception $e) {
             return response()->json([
                 "status" => "error",
-                "message" => $e->getMessage()
-            ]);
+                "message" => "Customer signup Fail"
+            ],401);
         }
     }
     public function login(Request $request)
@@ -50,6 +51,7 @@ class CustomerController extends Controller
          $count = User::where('email', '=', $request->input('email'))
              ->where('password', '=', $request->input('password'))
              ->select('id')->first();
+       
          if ($count !== null) {
              $token = JWTToken::createJwtToken($request->input('email'), $count->id);
              return response()->json([
@@ -62,7 +64,7 @@ class CustomerController extends Controller
                  'message' => "unauthorized"
              ], 401);
         }
-        return 1;
+        
     }
 
     public function logout(Request $request){
@@ -71,6 +73,28 @@ class CustomerController extends Controller
             "url" => "login page url",
         ], 200)->cookie("token", null, -1);
     }
+
+public function forget(Request $request){
+    try {
+        $email = $request->header('email');
+        //echo $email;
+        $password = $request->input('password');
+       // echo $password;
+        $user = User::where('email', $email)->first();
+        $user->password = $password;
+        $user->save();
+        return response()->json([
+          "status" => "success",
+          "message" => "Reset Password Success"
+        ], 200);
+      } catch (Exception $e) {
+        return response()->json([
+          "status" => "failed",
+          "message" => "Reset Password fail"
+        ], 401);
+      }
+}
+
 
     public function profileGet(Request $request){
         $user_id = $request->id;

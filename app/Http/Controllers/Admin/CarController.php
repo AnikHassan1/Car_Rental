@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Cars;
+use App\Models\Car;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
 class CarController extends Controller
@@ -14,7 +14,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return Cars::get();
+        return Car::get();
     }
 
     /**
@@ -51,14 +51,14 @@ class CarController extends Controller
         $img_url = "uploads/{$img_name}";
         $img_file->move(public_path('uploads'), $img_name);
 
-        return Cars::create([
-            'name' => $request->name,
-            'brand' =>  $request->brand,
-            'model' =>  $request->model,
-            'year' =>  $request->year,
-            'car_type' =>  $request->car_type,
-            'daily_rent_price' =>  $request->daily_rent_price,
-            'availability' =>  $request->availability,
+        return Car::create([
+            'name' => $request->input('name'),
+            'brand' =>  $request->input('brand'),
+            'model' =>  $request->input('model'),
+            'year' =>  $request->input('year'),
+            'car_type' =>  $request->input('car_type'),
+            'daily_rent_price' =>  $request->input('daily_rent_price'),
+            'availability' =>  $request->input('availability'),
             'image' => $img_url
         ]);
     }
@@ -69,7 +69,7 @@ class CarController extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        return Cars::where('id', $id)->first();
+        return Car::where('id', $id)->first();
     }
 
     /**
@@ -78,7 +78,7 @@ class CarController extends Controller
     public function edit(Request $request)
     {
         $id = $request->id;
-        return Cars::where('id', $id)->first();
+        return Car::where('id', $id)->first();
     }
 
     /**
@@ -100,7 +100,7 @@ class CarController extends Controller
             $file_path = $request->input('filePath');
             file::delete($file_path);
 
-            return cars::where('id', $id)->update([
+            return Car::where('id', $id)->update([
                 'name' => $request->name,
                 'brand' =>  $request->brand,
                 'model' =>  $request->model,
@@ -111,7 +111,7 @@ class CarController extends Controller
                 'image' => $img_url
             ]);
         }else{
-            return cars::where('id', $id)->update([
+            return Car::where('id', $id)->update([
                 'name' => $request->name,
                 'brand' =>  $request->brand,
                 'model' =>  $request->model,
@@ -123,16 +123,12 @@ class CarController extends Controller
         }
 
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request)
     {
 
         $id = $request->id;
         $img = $request->input('filePath');
         file::delete($img);
-        return cars::where('id',$id)->delete();
+        return Car::where('id',$id)->delete();
     }
 }
