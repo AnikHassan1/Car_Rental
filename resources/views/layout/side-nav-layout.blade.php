@@ -45,7 +45,7 @@
             <span class="icon-nav m-0 h5" onclick="MenuBarClickHandler()">
                 <img class="nav-logo-sm mx-2"  src="{{asset('images/menu.svg')}}" alt="logo"/>
             </span>
-            <img class="nav-logo  mx-2"  src="{{asset('images/logo.png')}}" alt="logo"/>
+            <img class="nav-logo  mx-2"  src="{{asset('images/carRent.png')}}" alt="logo"/>
         </a>
 
         <div class="float-right h-auto d-flex">
@@ -70,7 +70,7 @@
 </nav>
 
 
-<div id="sideNavRef" class="side-nav-open">
+<div id="sideNav" class="side-nav-open">
 
     <a href="{{url('/dashboard')}}" class="side-bar-item">
         <i class="bi bi-graph-up"></i>
@@ -82,36 +82,23 @@
         <span class="side-bar-item-caption">Customer</span>
     </a>
 
-    <a href="{{url('/categoryPage')}}" class="side-bar-item">
-        <i class="bi bi-list-nested"></i>
-        <span class="side-bar-item-caption">Category</span>
+    <a href="{{url('/car')}}" class="side-bar-item">
+        <i class="bi bi-ev-front"></i>
+        <span class="side-bar-item-caption">Car</span>
     </a>
 
     <a href="{{url('/productPages')}}" class="side-bar-item">
-        <i class="bi bi-bag"></i>
-        <span class="side-bar-item-caption">Product</span>
+        <i class="bi bi-ev-front-fill"></i>
+        <span class="side-bar-item-caption">Rentals</span>
     </a>
 
-    <a href="{{url('/Sales-Pages')}}" class="side-bar-item">
-        <i class="bi bi-currency-dollar"></i>
-        <span class="side-bar-item-caption">Create Sale</span>
-    </a>
-
-    <a href="{{url('/Invoice-Pages')}}" class="side-bar-item">
-        <i class="bi bi-receipt"></i>
-        <span class="side-bar-item-caption">Invoice</span>
-    </a>
-
-    <a href="{{url('/Report-Pages')}}" class="side-bar-item">
-        <i class="bi bi-file-earmark-bar-graph"></i>
-        <span class="side-bar-item-caption">Report</span>
-    </a>
+ 
 
 
 </div>
 
 
-<div id="contentRef" class="content">
+<div id="content" class="content">
     @yield('content')
 </div>
 
@@ -119,16 +106,16 @@
 
 <script>
     function MenuBarClickHandler() {
-        let sideNav = document.getElementById('sideNavRef');
-        let content = document.getElementById('contentRef');
-        if (sideNav.classList.contains("side-nav-open")) {
-            sideNav.classList.add("side-nav-close");
-            sideNav.classList.remove("side-nav-open");
+        let sideBar = document.getElementById('sideNav');
+        let content = document.getElementById('content');
+        if (sideBar.classList.contains("side-nav-open")) {
+            sideBar.classList.add("side-nav-close");
+            sideBar.classList.remove("side-nav-open");
             content.classList.add("content-expand");
             content.classList.remove("content");
         } else {
-            sideNav.classList.remove("side-nav-close");
-            sideNav.classList.add("side-nav-open");
+            sideBar.classList.remove("side-nav-close");
+            sideBar.classList.add("side-nav-open");
             content.classList.remove("content-expand");
             content.classList.add("content");
         }

@@ -27,8 +27,14 @@
                                 <label class="form-label">Daily Rent Price *</label>
                                 <input type="text" class="form-control" id="carRent">
 
+                               
+
                                 <label class="form-label">Availability Status *</label>
-                                <input type="text" class="form-control" id="carStatus">
+                                <select class="form-control" id="carStatus" aria-label="Default select example">
+                                    <option value="1">Available</option>
+                                    <option value="0">Unavailable</option>
+                                    
+                                  </select>
 
                                 <br/>
                                 <img class="w-15" id="newImg" src="{{asset('images/default.jpg')}}"/>
@@ -100,28 +106,28 @@
             formData.append('car_type',carType);
             formData.append('daily_rent_price',carRent);
             formData.append('image',carImage);
-
-            const config = {
-                headers: {
-                    'content-type': 'multipart/form-data'
-                }
-            }
-
-            showLoader();
-            let res = await axios.post("/cars",formData,config);
-            hideLoader();
-
-            if(res.status===201){
-                successToast('Request completed');
-                document.getElementById("save-form").reset();
-                document.getElementById('newImg').src="{{asset('images/default.jpg')}}";
-                await getList();
-                
-            }
-            else{
-                errorToast("Request fail !");
-            }
-        }
+            console.log(formData);
+          //   const config = {
+          //      headers: {
+          //          'content-type': 'multipart/form-data'
+          //      }
+          //  }
+//
+          // // showLoader();
+          //  let res = await axios.post("/cars",formData,config);
+          // // hideLoader();
+//
+          //  if(res.status===201){
+          //      successToast('Request completed');
+          //      document.getElementById("save-form").reset();
+          //      document.getElementById('newImg').src="{{asset('images/default.jpg')}}";
+          //      await getList();
+          //      
+          //  }
+          //  else{
+          //      errorToast("Request fail !");
+          //  }  
+        }//
     }
  
 </script>

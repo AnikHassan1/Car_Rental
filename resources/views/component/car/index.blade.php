@@ -51,16 +51,15 @@ async function getList() {
       
     tableData.DataTable().destroy();
     tableList.empty();
-
+    
     res.data.forEach(function (item,index) {
-        let status;
+        let status='';
         if(item['availability'] == 1){
             let status = "available";
         }else{
             let status = "Unavailable";
         }
         let row=`<tr>
-                   
                     <td>${item['image']}</td>
                     <td>${item['name']}</td>
                     <td>${item['brand']}</td>
@@ -77,11 +76,11 @@ async function getList() {
         tableList.append(row)
     })
 //
-   // $('.editBtn').on('click', async function () {
-   //        let id= $(this).data('id');
-   //        await FillUpUpdateForm(id)
-   //        $("#update-modal").modal('show');
-   // })
+    $('.editBtn').on('click', async function () {
+           let id= $(this).data('id');
+           await FillUpUpdateForm(id)
+           $("#update-modal").modal('show');
+    })
 //
    // $('.deleteBtn').on('click',function () {
    //     let id= $(this).data('id');

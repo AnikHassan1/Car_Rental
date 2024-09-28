@@ -41,7 +41,7 @@ class CarController extends Controller
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048']
 
         ]);
-        $user_id = $request->input('id');
+        $user_id = $request->header('id');
 
         $img_file = $request->file('image');
         $time = time();
@@ -101,13 +101,13 @@ class CarController extends Controller
             file::delete($file_path);
 
             return Car::where('id', $id)->update([
-                'name' => $request->name,
-                'brand' =>  $request->brand,
-                'model' =>  $request->model,
-                'year' =>  $request->year,
-                'car_type' =>  $request->car_type,
-                'daily_rent_price' =>  $request->daily_rent_price,
-                'availability' =>  $request->availability,
+                'name' => $request->input('name'),
+                'brand' =>  $request->input('brand'),
+                'model' =>  $request->input('model'),
+                'year' =>  $request->input('year'),
+                'car_type' =>  $request->input('car_type'),
+                'daily_rent_price' =>  $request->input('daily_rent_price'),
+                'availability' =>$request->input('availability'),
                 'image' => $img_url
             ]);
         }else{
