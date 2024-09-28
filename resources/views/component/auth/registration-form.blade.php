@@ -20,7 +20,7 @@
 
                         <button onclick="submit()" class="btn btn-primary btn-lg btn-block mt-2">Sign Up</button>
                         <div>
-                          <h5>Already member? 
+                          <h5>Already member?
                             <a href="{{ url('/login-page') }}"type="button"
                                 class=" mt-3 w-50 text-bg-danger"> Login here</a>
                                </h5>
@@ -52,7 +52,7 @@
             if (res.status === 200 && res.data['status'] === 'success') {
                 successToast(res.data['message']);
                 setTimeout(() => {
-                    window.location.href="/dashboard";
+                    window.location.href="/login-page";
                 }, 1000);
             } else {
                 errorToast(res.data['message']);

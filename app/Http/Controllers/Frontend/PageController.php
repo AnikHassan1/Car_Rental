@@ -2,33 +2,55 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Helper\JWTToken;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class PageController extends Controller
-{
-    function dashboard(){
-        return view('pages.dashboard.dashboard-pages');
+class PageController extends Controller {
+    function home( Request $request ) {
+        if ( $request->cookie( 'token' ) == null ) {
+            return view( 'pages.frontend.main' );
+        } else {
+            $token = $request->cookie( 'token' );
+            $result = JWTToken::verifyJwtToken( $token );
+            $user = User::where( 'id', $result->userId )->where( 'email', $result->userEmail )->where( 'role', 'customer' )->first();
+            return view( 'pages.frontend.main', [
+                'user' => $user,
+            ] );
+        }
+
     }
-    function car(){
-        return view('pages.dashboard.car');
+
+    function dashboard() {
+        return view( 'pages.dashboard.dashboard-pages' );
     }
-    function register(){
-        return view('pages.Auth.registration-page');
+
+    function car() {
+        return view( 'pages.dashboard.car' );
     }
-    function login(){
-        return view('pages.Auth.login');
+
+    function register() {
+        return view( 'pages.Auth.registration-page' );
     }
-    function forget(){
-        return view('pages.Auth.forget');
+
+    function login() {
+        return view( 'pages.Auth.login' );
     }
-    function contact(){
-        return view('pages.frontend.contact');
+
+    function forget() {
+        return view( 'pages.Auth.forget' );
     }
-    function about(){
-        return view('pages.frontend.about');
+
+    function contact() {
+        return view( 'pages.frontend.contact' );
     }
-    function rantals(){
-        return view('pages.frontend.about');
+
+    function about() {
+        return view( 'pages.frontend.about' );
+    }
+
+    function rantals() {
+        return view( 'pages.frontend.about' );
     }
 }

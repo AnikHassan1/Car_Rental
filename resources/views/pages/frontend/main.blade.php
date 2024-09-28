@@ -7,6 +7,7 @@
 @include('component.frontend.works')
 @include('component.frontend.easy')
 @include('component.frontend.carListing')
+@include('component.frontend.freture')
 @include('component.frontend.waiting')
 @include('component.frontend.footer')
 @endsection

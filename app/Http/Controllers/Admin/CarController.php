@@ -66,9 +66,8 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(Request $request, string $id)
     {
-        $id = $request->id;
         return Car::where('id', $id)->first();
     }
 
@@ -78,6 +77,7 @@ class CarController extends Controller
     public function edit(Request $request)
     {
         $id = $request->id;
+        //return $id;
         return Car::where('id', $id)->first();
     }
 

@@ -1,4 +1,4 @@
-<div class="modal animated zoomIn" id="create-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal animated zoomIn" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -14,7 +14,7 @@
 
                                 <label class="form-label">Car Brand *</label>
                                 <input type="text" class="form-control" id="carBrand">
-                               
+
                                 <label class="form-label">Car Model *</label>
                                 <input type="text" class="form-control" id="carModel">
 
@@ -27,13 +27,13 @@
                                 <label class="form-label">Daily Rent Price *</label>
                                 <input type="text" class="form-control" id="carRent">
 
-                               
+
 
                                 <label class="form-label">Availability Status *</label>
                                 <select class="form-control" id="carStatus" aria-label="Default select example">
                                     <option value="1">Available</option>
                                     <option value="0">Unavailable</option>
-                                    
+
                                   </select>
 
                                 <br/>
@@ -92,42 +92,44 @@
         else if(carImage.length===0){
             errorToast("Car Image Mobile Required !")
         }
-        
+
         else {
 
             document.getElementById('modal-close').click();
 
-            let formData=new FormData();
-            
+            let formData= new FormData();
+
             formData.append('name',carName);
             formData.append('brand',carBrand);
             formData.append('model',carModel);
             formData.append('year',carYear);
             formData.append('car_type',carType);
             formData.append('daily_rent_price',carRent);
+            formData.append('availability',carStatus);
             formData.append('image',carImage);
-            console.log(formData);
-          //   const config = {
-          //      headers: {
-          //          'content-type': 'multipart/form-data'
-          //      }
-          //  }
-//
-          // // showLoader();
-          //  let res = await axios.post("/cars",formData,config);
-          // // hideLoader();
-//
-          //  if(res.status===201){
-          //      successToast('Request completed');
-          //      document.getElementById("save-form").reset();
-          //      document.getElementById('newImg').src="{{asset('images/default.jpg')}}";
-          //      await getList();
-          //      
-          //  }
-          //  else{
-          //      errorToast("Request fail !");
-          //  }  
+           // alert(formData);
+
+             const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+
+           // showLoader();
+            let res = await axios.post("/cars",formData,config);
+           // hideLoader();
+
+            if(res.status===201){
+                successToast('Request completed');
+                document.getElementById("save-form").reset();
+                document.getElementById('newImg').src="{{asset('images/default.jpg')}}";
+                await getList();
+
+            }
+            else{
+                errorToast("Request fail !");
+            }
         }//
     }
- 
+
 </script>
